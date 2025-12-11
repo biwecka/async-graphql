@@ -14,23 +14,29 @@ impl ScalarType for BigDecimal {
                 println!("[BigDecimal] value is a number");
 
                 if let Some(f) = n.as_f64() {
-                    println!("[BigDecimal] value is a f64: {f}");
-                    return BigDecimal::try_from(f).map_err(InputValueError::custom);
+                    let val = BigDecimal::try_from(f).map_err(InputValueError::custom)?;
+                    println!("[BigDecimal] value is a f64: {f} => {val:?}");
+                    return Ok(val);
                 }
 
                 if let Some(f) = n.as_i64() {
-                    println!("[BigDecimal] value is a i64: {f}");
-                    return Ok(BigDecimal::from(f));
+                    let val = BigDecimal::from(f);
+                    println!("[BigDecimal] value is a i64: {f} => {val:?}");
+                    return Ok(val);
                 }
 
-                println!("[BigDecimal] value is 'probably' a u64: {}", n.as_u64().unwrap());
+                let n2 = n.as_u64().unwrap();
+                let val = BigDecimal::from(n2);
+
+                println!("[BigDecimal] value is 'probably' a u64: {n2} => {val:?}");
 
                 // unwrap safe here, because we have check the other possibility
-                Ok(BigDecimal::from(n.as_u64().unwrap()))
+                Ok(val)
             }
             Value::String(s) => {
-                println!("[BigDecimal] value is a string '{s}': {:?}", BigDecimal::from_str(s));
-                Ok(BigDecimal::from_str(s)?)
+                let val = BigDecimal::from_str(s)?;
+                println!("[BigDecimal] value is a string '{s}' => {:?}", val);
+                Ok(val)
             },
             _ => Err(InputValueError::expected_type(value)),
         }
