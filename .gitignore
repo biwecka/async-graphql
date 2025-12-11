@@ -6,3 +6,5 @@ Cargo.lock
 node_modules
 
 benchmark/target
+
+.direnv/
