@@ -29,7 +29,7 @@ impl ScalarType for BigDecimal {
                 Ok(BigDecimal::from(n.as_u64().unwrap()))
             }
             Value::String(s) => {
-                println!("[BigDecimal] value is a string "{s}": {:?}", BigDecimal::from_str(s));
+                println!("[BigDecimal] value is a string '{s}': {:?}", BigDecimal::from_str(s));
                 Ok(BigDecimal::from_str(s)?)
             },
             _ => Err(InputValueError::expected_type(value)),
