@@ -44,6 +44,8 @@ impl<'de> Deserialize<'de> for ConstValue {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         struct ValueVisitor;
 
+        println!("deserializer 1 called");
+
         impl<'de> Visitor<'de> for ValueVisitor {
             type Value = ConstValue;
 
@@ -197,6 +199,8 @@ impl Serialize for Value {
 impl<'de> Deserialize<'de> for Value {
     fn deserialize<D: Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
         struct ValueVisitor;
+
+        println!("deserializer 2 called");
 
         impl<'de> Visitor<'de> for ValueVisitor {
             type Value = Value;
