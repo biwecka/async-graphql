@@ -35,6 +35,10 @@ raw_value = ["async-graphql-value/raw_value"]
 uuid-validator = ["uuid"]
 boxed-trait = ["async-graphql-derive/boxed-trait"]
 custom-error-conversion = []
+bigdecimal = [
+  "dep:bigdecimal",     # enables the optional dependency
+  "serde_json/arbitrary_precision",       # enables a feature on another dependency
+]
 
 [[bench]]
 harness = false
