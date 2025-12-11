@@ -7,15 +7,8 @@ use crate::{InputValueError, InputValueResult, Scalar, ScalarType, Value};
 #[Scalar(internal, name = "BigDecimal")]
 impl ScalarType for BigDecimal {
     fn parse(value: Value) -> InputValueResult<Self> {
-        println!("[BigDecimal] value={value:?}");
-
         match &value {
-            Value::String(s) => {
-                let val = BigDecimal::from_str(s)?;
-                println!("[BigDecimal] value is a string '{s}' => {:?}", val);
-                Ok(val)
-            },
-
+            Value::String(s) => Ok(BigDecimal::from_str(s)?),
             _ => Err(InputValueError::expected_type(value)),
         }
     }
