@@ -13,6 +13,8 @@ mod non_zero_integers;
 mod optional;
 mod string;
 
+#[cfg(feature = "bigdecimal")]
+mod big_decimal;
 #[cfg(feature = "chrono-tz")]
 mod chrono_tz;
 #[cfg(feature = "chrono")]

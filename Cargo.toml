@@ -82,6 +82,7 @@ jiff = { version = "0.2.18", optional = true }
 log = { version = "0.4.21", optional = true }
 
 rust_decimal = { version = "1.35.0", optional = true, default-features = false }
+bigdecimal = { version = ">=0.3.0, <0.5.0", optional = true, default-features = false }
 secrecy = { version = "0.10.3", optional = true }
 time = { version = "0.3.36", optional = true, features = [
   "parsing",
