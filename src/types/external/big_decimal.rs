@@ -45,6 +45,19 @@ impl ScalarType for BigDecimal {
                 println!("[BigDecimal] value is a string '{s}' => {:?}", val);
                 Ok(val)
             },
+
+            Value::Object(o) => {
+                match o.get("$serde_json::private::Number") {
+                    Some(async_graphql_value::ConstValue::String(s)) => {
+                        let val = BigDecimal::from_str(s)?;
+                        println!("[BigDecimal] value came from object '{o:?}' => {:?}", val);
+                        Ok(val)
+                    },
+
+                    _ => Err(InputValueError::from("Invalid number"))
+                }
+            },
+
             _ => Err(InputValueError::expected_type(value)),
         }
     }
