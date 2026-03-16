@@ -1,11 +1,15 @@
 //! A helper module that supports HTTP
 
+#[cfg(feature = "altair")]
+mod altair_source;
 #[cfg(feature = "graphiql")]
 mod graphiql_source;
 mod multipart;
 mod multipart_subscribe;
 mod websocket;
 
+#[cfg(feature = "altair")]
+pub use altair_source::*;
 use futures_util::io::{AsyncRead, AsyncReadExt};
 #[cfg(feature = "graphiql")]
 pub use graphiql_source::{Credentials, GraphiQLSource};
